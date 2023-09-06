@@ -19,4 +19,5 @@ Then run the program in command line. Maybe I'll add command line args support i
 
 # Special Thanks
 Salanewt, Beyond, and tarpman from the GS Hacking server 
+
 Atrius for TLAEditor (so I can double check if I did things right)
