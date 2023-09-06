@@ -18,6 +18,6 @@ To insert (manual hex editing), replace all the sprite pointers with pointer dat
 Then run the program in command line. Maybe I'll add command line args support in the future.
 
 # Special Thanks
-Salanewt, Beyond, and tarpman from the GS Hacking server 
+Salanewt, Beyond, Misery and tarpman from the GS Hacking server 
 
 Atrius for TLAEditor (so I can double check if I did things right)
