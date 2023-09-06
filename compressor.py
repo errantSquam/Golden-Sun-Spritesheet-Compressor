@@ -3,10 +3,15 @@ import numpy as np
 import math
 import os 
 
-input_folder = "input_isaac_TBS" #folder of .pngs go here
-output_spritesheet_name = "isaac_TBS_spritesheet.bin"
-output_pointers_name = "isaac_TBS_pointers.bin"
-starting_pointer = 0x806D40 #where the spritesheet will be inserted in data
+charname = "isaac"
+gamename = "TBS"
+
+
+
+input_folder = f"input_{charname}_{gamename}" #folder of .pngs go here
+output_spritesheet_name = f"{charname}_{gamename}_spritesheet.bin"
+output_pointers_name = f"{charname}_{gamename}_pointers.bin"
+starting_pointer = 0x08007C70  #where the spritesheet will be inserted in data. PLEASE REMEMBER THE 08
 
 def convert_png_to_bgr555(input_file, output_file = None):
     # Open the PNG image using PIL (Python Imaging Library)
@@ -105,6 +110,7 @@ def encode_image_with_palette(data, palette_array, palette_dict, output_file = N
                     #print(f"Closest color: {closest}")
                     current_color = palette_dict.get(closest)
                     common_colors[pixel] = current_color
+                    #print(common_colors)
                 
             #print(f"Final color: {current_color.hex()} / {int.from_bytes(current_color, 'little')}")
             #print("--")
@@ -233,6 +239,4 @@ with open(output_spritesheet_name, 'wb') as file:
     
 with open(output_pointers_name, 'wb') as file:
     file.write(pointer_output[:-4])
-#print("OFFENDING PIXEL:")
-#closest = sorted(palette_array, key=lambda x: distance((200, 200, 200, 255), x))[0]
-#print(palette_dict[closest])
+
