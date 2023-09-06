@@ -14,3 +14,5 @@ starting_pointer = 0x806D40 Start of pointers. This is where the spritesheet dat
 
 To insert (manual hex editing), replace all the sprite pointers with pointer data, and insert the spritesheet data where you defined the starting_pointer. 
 **Make sure to change your character's sprite type to format 0.**
+
+Then run the program in command line. Maybe I'll add command line args support in the future.
