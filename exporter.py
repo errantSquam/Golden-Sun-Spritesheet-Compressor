@@ -8,9 +8,8 @@ import struct
 
 width = 64 # in denary, please 
 height = 64 # in denary, please
-game = "gs1.gba"
-
-pointerTable_start = 0x2DDC74 
+game = "gs2.gba"
+gametype = "TLA"
 
 
 battle_pointer_dict = {
@@ -18,9 +17,18 @@ battle_pointer_dict = {
         "Isaac" : 0x2DDC74,
         "Garet" : 0x2E7A1C,
         "Ivan" : 0x2F813C,
-        "Mia" : 0x3000BC
+        "Mia" : 0x3000BC,#303
+
+    },
+    "TLA" : {
+        "Felix": 0x310E24, #20*508 + 0x300000 => 3027B0
+        "Sheba": 0x3110F4, #302864
+        "Piers": 0x311234, #3028B4
+        "Piers_Mace": 0x311284, #0x3028C8
+        "Dullahan": 0x3113C4 #302A08
     }
 }
+#Ivan weapons: #322, #331
 #startPointer = 0x2D8C80 #NO 08 for these
 #endPointer = 0x2E1E54
 
@@ -52,7 +60,7 @@ def export_character(golden_sun, character, pointerTable_start, inv_palette):
     pointer_table = golden_sun[pointerTable_start:]
 
     pointerTable_end = 0
-
+    print(pointerTable_start)
     addresses = []
     for i in range(0, len(pointer_table), 4):
         pointer = [j for j in pointer_table[i:i+4]]
@@ -71,6 +79,7 @@ def export_character(golden_sun, character, pointerTable_start, inv_palette):
         
         addresses.append(int.from_bytes(address, 'little'))
 
+    print(addresses)
 
 
     for addressIndex in range(len(addresses)):
@@ -89,7 +98,9 @@ inv_palette = {v: k for k, v in palette_dict.items()}
 golden_sun = bytearray(open(game, "rb").read())
 
 
-for character in battle_pointer_dict["TBS"].keys(): 
-    pointerTable_start = battle_pointer_dict["TBS"][character]
+for character in battle_pointer_dict[gametype].keys(): 
+    print(character)
+
+    pointerTable_start = battle_pointer_dict[gametype][character]
     export_character(golden_sun, character, pointerTable_start, inv_palette)
 
